@@ -8,5 +8,5 @@ public interface ProductService {
     public Product findProductById(String id);
     public Product create(Product product);
     public Product edit(Product updatedProduct);
-
+    public Product delete(String id);
 }

@@ -7,11 +7,20 @@
 </head>
 <body>
 <div>
+    <h3>Edit Product</h3>
+
     <form th:action="@{/product/edit}" th:object="${product}" method="post">
         <input type="hidden" th:field="*{productId}" />
 
+        <label>Name:</label>
         <input type="text" th:field="*{productName}" />
+
+        <br>
+
+        <label>Quantity:</label>
         <input type="number" th:field="*{productQuantity}" />
+
+        <br>
 
         <button type="submit">Save</button>
     </form>
