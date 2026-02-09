@@ -1,7 +1,7 @@
 package id.ac.ui.cs.advprog.eshop.service;
 
-package id.ac.ui.cs.advprog.eshop.model.Product;
-package id.ac.ui.cs.advprog.eshop.repository.ProductRepository;
+import id.ac.ui.cs.advprog.eshop.model.Product;
+import id.ac.ui.cs.advprog.eshop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
