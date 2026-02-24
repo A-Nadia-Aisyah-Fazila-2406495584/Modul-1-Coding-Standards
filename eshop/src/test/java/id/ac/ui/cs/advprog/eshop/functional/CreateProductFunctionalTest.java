@@ -34,7 +34,7 @@ public class CreateProductFunctionalTest {
     }
 
     @Test
-    void createProduct_isSuccessful(ChromeDriver driver) throws Exception {
+    void createProduct_isSuccessful(ChromeDriver driver) {
         driver.get(baseUrl + "/product/create");
 
         String productName = "Sampo Cap Bambang";
