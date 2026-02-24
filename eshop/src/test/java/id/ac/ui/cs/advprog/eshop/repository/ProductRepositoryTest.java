@@ -18,6 +18,7 @@ class ProductRepositoryTest {
 
     @BeforeEach
     void setUp() {
+        // empty set up
     }
 
     @Test
