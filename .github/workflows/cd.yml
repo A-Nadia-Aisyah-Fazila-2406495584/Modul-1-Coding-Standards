@@ -1,4 +1,4 @@
-name: Deploy to Koyeb (CD)
+name: Continuous Deployment to Koyeb
 
 on:
   push:
@@ -12,26 +12,15 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Install Koyeb CLI
         run: |
           curl -fsSL https://raw.githubusercontent.com/koyeb/koyeb-cli/master/install.sh | sh
           echo "$HOME/.koyeb/bin" >> $GITHUB_PATH
 
-      - name: Add Koyeb CLI to PATH
-        run: |
-          echo "$HOME/.koyeb/bin" >> $GITHUB_PATH
-
-      - name: Deploy to Koyeb via Git
+      - name: Deploy to Koyeb
         env:
-          KOYEB_TOKEN: ${{ secrets.KOYEB_TOKEN }}
+          KOYEB_TOKEN: ${{ secrets.KOYEB_API_TOKEN }}
         run: |
-          koyeb app update advshop \
-            --git-repo https://github.com/A-Nadia-Aisyah-Fazila-2406495584/Modul-1-Coding-Standards.git \
-            --git-branch main
-
-      - name: Wait for service readiness
-        run: |
-          echo "Waiting for service to become healthy..."
-          sleep 20
+          koyeb service update <app-name>/<service-name> --git-branch ${{ github.ref_name }}
