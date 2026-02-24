@@ -31,7 +31,7 @@ public class DeleteProductFunctionalTest {
     }
 
     @Test
-    void deleteProduct_isSuccessful(ChromeDriver driver) throws Exception {
+    void deleteProduct_isSuccessful(ChromeDriver driver) {
         driver.get(baseUrl + "/product/create");
         driver.findElement(By.id("nameInput")).sendKeys("Sampo Cap");
         driver.findElement(By.id("quantityInput")).sendKeys("10");
