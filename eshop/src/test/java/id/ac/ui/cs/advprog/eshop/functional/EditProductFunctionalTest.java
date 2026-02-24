@@ -32,7 +32,7 @@ public class EditProductFunctionalTest {
     }
 
     @Test
-    void editProductPage_titleAndHeader_isCorrect(ChromeDriver driver) throws Exception {
+    void editProductPage_titleAndHeader_isCorrect(ChromeDriver driver) {
         driver.get(baseUrl + "/product/create");
         driver.findElement(By.id("nameInput")).sendKeys("Test Title");
         driver.findElement(By.id("quantityInput")).sendKeys("1");
