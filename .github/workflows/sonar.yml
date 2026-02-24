@@ -24,11 +24,9 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x eshop/gradlew
 
-      - name: Build project
-        run: cd eshop && ./gradlew --no-daemon build
-
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v3
+      - name: Run SonarCloud analysis
+        working-directory: eshop
+        run: ./gradlew --no-daemon build sonar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

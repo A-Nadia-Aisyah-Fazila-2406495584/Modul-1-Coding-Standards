@@ -46,6 +46,14 @@ dependencies {
 	testImplementation("org.junit.jupiter:junit-jupiter:${junitJupiterVersion}")
 }
 
+sonar {
+	properties {
+		property("sonar.projectKey", "A-Nadia-Aisyah-Fazila-2406495584_Modul-1-Coding-Standards")
+		property("sonar.organization", "a-nadia-aisyah-fazila-2406495584")
+		property("sonar.host.url", "https://sonarcloud.io")
+	}
+}
+
 tasks.register<Test>("unitTest") {
 	description = "Runs unit tests."
 	group = "verification"
