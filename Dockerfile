@@ -1,8 +1,9 @@
 FROM docker.io/library/eclipse-temurin:21-jdk-alpine AS builder
 
 WORKDIR /src/advshop
-COPY .. .
-RUN ./gradlew clean bootJar
+COPY . .
+RUN chmod +x ./eshop/gradlew
+RUN ./eshop/gradlew clean bootJar
 
 FROM docker.io/library/eclipse-temurin:21-jre-alpine AS runner
 
@@ -15,7 +16,7 @@ RUN addgroup -g ${USER_GID} ${USER_NAME} \
 
 USER ${USER_NAME}
 WORKDIR /opt/advshop
-COPY --from=builder --chown=${USER_UID}:${USER_GID} /src/advshop/build/libs/*.jar app.jar
+COPY --from=builder --chown=${USER_UID}:${USER_GID} /src/advshop/eshop/build/libs/*.jar app.jar
 
 EXPOSE 8080
 
