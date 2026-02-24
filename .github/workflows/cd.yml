@@ -1,4 +1,4 @@
-name: Continuous Deployment to Koyeb
+name: Continuous Deployment to Koyeb (CD)
 
 on:
   push:

@@ -4,9 +4,10 @@
 
 **ADPRO-A**
 
-Tutorial Modul 1
----
-
+<details>
+<summary>
+<b>Reflection Modul 1</b>
+</summary>
 **Reflection 1**
     Pada modul ini, saya mempelajari tentang konsep clean code dan secure coding. Sebelumnya, saya 
 cenderung hanya fokus pada pembuatan program tanpa memperhatikan nama dari variabel maupun kerapihan pada kode
@@ -45,9 +46,13 @@ akan menyebabkan repetition yang tidak sesuai dengan prinsip *clean code*. Ya, a
 akan lebih sulit untuk di *maintenance* karena misal ada perubahan setup yang harus dilakukan maka akan harus dilakukan di 
 beberapa file, dimana itu akan meingkatkan resiko inkonsistensi. Untuk membuat kode tetap *clean*, bisa dilakukan dengan 
 menambahkan skenario tersebut ke `CreateProductFunctionalTest.java` saja supaya tidak terjadi *repetition*.
+</details>
 
-
-#Reflection 2
+<details>
+<summary>
+<b>Reflection Modul 2</b>
+</summary>
+#Reflection 
 ##You have implemented a CI/CD process that automatically runs the test suites, analyzes code quality, and deploys to a PaaS. Try to answer the following questions in order to reflect on your attempt completing the tutorial and exercise.
 **1. List the code quality issue(s) that you fixed during the exercise and explain your strategy on fixing them.**
 Saya memperbaiki beberapa *code quality issues*. Beberapa diantaranya adalah:
@@ -68,3 +73,4 @@ Menurut saya, implementasi saya sekarang sudah termasuk kategori CI/CD karena:
 - Setiap kali saya melakukan pull request ke GitHub, akan otomatis menjalankan workflows GitHub Actions yang menjalankan test, cek kualitas dari kode dengan SonarQube, serta melakukan analisis keamanan dengan OSSF Scorecard. Setiap kode yang di push dapat diverifikasi secara otomatis sehingga memenuhi prinsip Continuous Integration (CI)
 - Setelah pull request dimerge ke branch main, aplikasi secara otomatis diupdate di platform PaaS (Koyeb). Platform tersebut mendeteksi perubahan pada branch main, melakukan build menggunakan Dockerfile atau buildpack, dan memperbarui instance aplikasi hingga statusnya menjadi Healthy. Dengan begitu, setiap kode yang sudah lulus tahap pengujian dapat langsung tersedia sehingga memenuhi prinsip Continuous Deployment (CD)
   Intinya menurut saya, sudah memenuhi kategori CI/CD. CI dijalankan ketika melakukan pull request untuk melakukan verifikasi kode dan keamanannya, dan CD terjadi otomatis setelah merge ke main.
+</details>
