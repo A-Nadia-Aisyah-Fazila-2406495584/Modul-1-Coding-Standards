@@ -10,6 +10,6 @@ public class HomePageController {
 
     @GetMapping("/")
     public String homepage() {
-        return "homePage";
+        return "HomePage";
     }
 }
