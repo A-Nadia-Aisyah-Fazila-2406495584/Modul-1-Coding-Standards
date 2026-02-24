@@ -4,8 +4,12 @@
 
 **ADPRO-A**
 
-Tutorial Modul 1
----
+Deployment link -> [permanent-thomasa-a-nadiaaisyahfazila-2406495584-f82740e8.koyeb.app/]
+
+<details>
+<summary>
+<b>Reflection Modul 1</b>
+</summary>
 
 **Reflection 1**
     Pada modul ini, saya mempelajari tentang konsep clean code dan secure coding. Sebelumnya, saya 
@@ -45,5 +49,32 @@ akan menyebabkan repetition yang tidak sesuai dengan prinsip *clean code*. Ya, a
 akan lebih sulit untuk di *maintenance* karena misal ada perubahan setup yang harus dilakukan maka akan harus dilakukan di 
 beberapa file, dimana itu akan meingkatkan resiko inkonsistensi. Untuk membuat kode tetap *clean*, bisa dilakukan dengan 
 menambahkan skenario tersebut ke `CreateProductFunctionalTest.java` saja supaya tidak terjadi *repetition*.
+</details>
 
+<details>
+<summary>
+<b>Reflection Modul 2</b>
+</summary>
 
+#Reflection 
+##You have implemented a CI/CD process that automatically runs the test suites, analyzes code quality, and deploys to a PaaS. Try to answer the following questions in order to reflect on your attempt completing the tutorial and exercise.
+**1. List the code quality issue(s) that you fixed during the exercise and explain your strategy on fixing them.**
+Saya memperbaiki beberapa *code quality issues*. Beberapa diantaranya adalah:
+- **Penamaan controller dan template**
+  Sebelumnya, `HomePageController` return “homePage", sedangkan unit test mengharapkan “HomePage". Hal ini menyebabkan test gagal karena perbedaan case-sensitive. Strategi perbaikannya adalah menyamakan return value di controller dan unit test sehingga test lulus.
+- **File template**
+  Beberapa template yang saja buat memiliki perbedaan nama dibandingkan yang expected di unit test. Yang saya lakukan untuk memperbaikinya adalah dengan mengganti nama file agar sesuai dengan return value di controller, sehingga *Thymeleaf* dapat menemukan template dan test jadi berhasil.
+- **Jacoco test report**
+  Awalnya, SonarCloud menunjukkan 0% coverage, yang membuat *Quality Gate* gagal. Saya memperbaikinya dengan mengaktifkan `XML report Jacoco` di `build.gradle.kts` dan memastikan task `jacocoTestReport` dijalankan setelah test, sehingga SonarCloud bisa membaca hasil coverage kemudian Quality Gate dapat dipenuhi.
+  Beberapa yang terdeteksi oleh SonarQube:
+- Method test yang melempar throws Exception (Code smell)
+  Awalnya pada `ProductControllerTest ` dan beberapa test lainnya menuliskan `throws Exception` yang ditandai sebagai bad practice di SonarQube. Saya memperbaikinya dengan menggantinya dengan *try-catch* di dalam test kemudian menambahkan `fail()` jika ada exception
+- Package mismatch pada test (Code smell)
+  Sebelumnya, SonarQube memberikan warning karena ada beberapa file yang pathnya tidak sesuai dengan package declarationnya. Saya memperbaikinya dengan mengganti nama foldernya supaya sesuai dan konsisten.
+
+**2. Look at your CI/CD workflows (GitHub)/pipelines (GitLab). Do you think the current implementation has met the definition of Continuous Integration and Continuous Deployment? Explain the reasons (minimum 3 sentences)!**
+Menurut saya, implementasi saya sekarang sudah termasuk kategori CI/CD karena:
+- Setiap kali saya melakukan pull request ke GitHub, akan otomatis menjalankan workflows GitHub Actions yang menjalankan test, cek kualitas dari kode dengan SonarQube, serta melakukan analisis keamanan dengan OSSF Scorecard. Setiap kode yang di push dapat diverifikasi secara otomatis sehingga memenuhi prinsip Continuous Integration (CI)
+- Setelah pull request dimerge ke branch main, aplikasi secara otomatis diupdate di platform PaaS (Koyeb). Platform tersebut mendeteksi perubahan pada branch main, melakukan build menggunakan Dockerfile atau buildpack, dan memperbarui instance aplikasi hingga statusnya menjadi Healthy. Dengan begitu, setiap kode yang sudah lulus tahap pengujian dapat langsung tersedia sehingga memenuhi prinsip Continuous Deployment (CD)
+  Intinya menurut saya, sudah memenuhi kategori CI/CD. CI dijalankan ketika melakukan pull request untuk melakukan verifikasi kode dan keamanannya, dan CD terjadi otomatis setelah merge ke main.
+</details>
