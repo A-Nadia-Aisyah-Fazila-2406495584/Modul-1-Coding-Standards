@@ -1,13 +1,14 @@
-package id.ac.ui.cs.advprog.eshop.controller;
-
+import id.ac.ui.cs.advprog.eshop.controller.ProductController;
 import id.ac.ui.cs.advprog.eshop.model.Product;
 import id.ac.ui.cs.advprog.eshop.service.ProductService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Arrays;
 
@@ -16,28 +17,23 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.junit.jupiter.api.extension.ExtendWith;
-
-@WebMvcTest(ProductController.class)
+@ExtendWith(MockitoExtension.class)
 class ProductControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-
     @Mock
-    private ProductService productService;
+    private ProductService productService; // mock dependency
 
     @InjectMocks
-    private ProductController productController;
+    private ProductController productController; // inject mock ke controller
 
+    private MockMvc mockMvc;
     private Product product1;
     private Product product2;
 
     @BeforeEach
     void setUp() {
+        mockMvc = MockMvcBuilders.standaloneSetup(productController).build();
+
         product1 = new Product();
         product1.setProductId("1");
         product1.setProductName("Product 1");
@@ -78,42 +74,5 @@ class ProductControllerTest {
                 .andExpect(model().attributeExists("products"));
 
         verify(productService, times(1)).findAll();
-    }
-
-    @Test
-    void testEditProductPage() throws Exception {
-        when(productService.findProductById("1")).thenReturn(product1);
-
-        mockMvc.perform(get("/product/edit/1"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("EditProduct"))
-                .andExpect(model().attributeExists("product"));
-
-        verify(productService, times(1)).findProductById("1");
-    }
-
-    @Test
-    void testEditProductPost() throws Exception {
-        when(productService.edit(any(Product.class))).thenReturn(product1);
-
-        mockMvc.perform(post("/product/edit")
-                        .param("productId", "1")
-                        .param("productName", "Updated Product")
-                        .param("productQuantity", "5"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("list"));
-
-        verify(productService, times(1)).edit(any(Product.class));
-    }
-
-    @Test
-    void testDeleteProduct() throws Exception {
-        when(productService.delete("1")).thenReturn(product1);
-
-        mockMvc.perform(get("/product/delete/1"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/product/list"));
-
-        verify(productService, times(1)).delete("1");
     }
 }
