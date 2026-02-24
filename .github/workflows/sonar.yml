@@ -22,10 +22,10 @@ jobs:
           cache: gradle
 
       - name: Make gradlew executable
-        run: chmod +x ./gradlew
+        run: chmod +x eshop/gradlew
 
-      - name: Build and test
-        run: ./gradlew --no-daemon build
+      - name: Build project
+        run: cd eshop && ./gradlew --no-daemon build
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v3
