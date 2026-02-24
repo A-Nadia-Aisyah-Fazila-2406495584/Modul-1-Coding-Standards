@@ -4,7 +4,7 @@
 
 **ADPRO-A**
 
-Deployment link -> [permanent-thomasa-a-nadiaaisyahfazila-2406495584-f82740e8.koyeb.app/]
+Deployment link -> [https://permanent-thomasa-a-nadiaaisyahfazila-2406495584-f82740e8.koyeb.app/]
 
 <details>
 <summary>
