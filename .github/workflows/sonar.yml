@@ -24,6 +24,10 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x eshop/gradlew
 
+      - name: Build project
+        working-directory: eshop
+        run: ./gradlew clean build --no-daemon
+
       - name: Run SonarCloud analysis
         working-directory: eshop
         run: ./gradlew --no-daemon build sonar
