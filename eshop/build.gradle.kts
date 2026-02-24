@@ -6,6 +6,7 @@ val junitJupiterVersion = "5.9.1"
 plugins {
 	java
 	jacoco
+	id("org.sonarqube") version "6.0.1.5171"
 	id("org.springframework.boot") version "3.5.10"
 	id("io.spring.dependency-management") version "1.1.7"
 }
@@ -43,6 +44,14 @@ dependencies {
 	testImplementation("io.github.bonigarcia:selenium-jupiter:${seleniumJupiterVersion}")
 	testImplementation("io.github.bonigarcia:webdrivermanager:${webdrivermanagerVersion}")
 	testImplementation("org.junit.jupiter:junit-jupiter:${junitJupiterVersion}")
+}
+
+sonar {
+	properties {
+		property("sonar.projectKey", "A-Nadia-Aisyah-Fazila-2406495584_Modul-1-Coding-Standards")
+		property("sonar.organization", "a-nadia-aisyah-fazila-2406495584")
+		property("sonar.host.url", "https://sonarcloud.io")
+	}
 }
 
 tasks.register<Test>("unitTest") {
