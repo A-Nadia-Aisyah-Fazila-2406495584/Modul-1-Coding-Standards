@@ -136,7 +136,7 @@ class ProductRepositoryTest {
 
         Product editedProduct = productRepository.findProductById("eb558e9f-1c39-460e-8860-71af6af63bd6");
 
-        assertEquals(editedProduct.getProductId(), "eb558e9f-1c39-460e-8860-71af6af63bd6");
+        assertEquals("eb558e9f-1c39-460e-8860-71af6af63bd6", editedProduct.getProductId());
         assertEquals("Sampo Cap Usep", editedProduct.getProductName());
         assertEquals(50, editedProduct.getProductQuantity());
     }
