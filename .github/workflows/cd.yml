@@ -19,13 +19,12 @@ jobs:
           curl -fsSL https://raw.githubusercontent.com/koyeb/koyeb-cli/master/install.sh | sh
           echo "$HOME/.koyeb/bin" >> $GITHUB_PATH
 
-      - name: Koyeb login
-        run: koyeb login --api-token ${{ secrets.KOYEB_API_TOKEN }}
-
       - name: Build Docker image
         run: docker build -t advshop:latest .
 
       - name: Deploy to Koyeb
+        env:
+          KOYEB_TOKEN: ${{ secrets.KOYEB_TOKEN }}  # <-- token disini
         run: |
           koyeb service update \
             --app advshop \
