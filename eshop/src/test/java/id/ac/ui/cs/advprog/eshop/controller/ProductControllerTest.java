@@ -88,4 +88,53 @@ class ProductControllerTest {
             fail("Exception thrown: " + e.getMessage());
         }
     }
+
+    @Test
+    void testEditProductPage() {
+        try {
+            when(productService.findProductById("1")).thenReturn(product1);
+
+            mockMvc.perform(get("/product/edit/1"))
+                    .andExpect(status().isOk())
+                    .andExpect(view().name("EditProduct"))
+                    .andExpect(model().attributeExists("product"));
+
+            verify(productService, times(1)).findProductById("1");
+        } catch (Exception e) {
+            fail("Exception thrown: " + e.getMessage());
+        }
+    }
+
+    @Test
+    void testEditProductPost() {
+        try {
+            when(productService.edit(any(Product.class))).thenReturn(product1);
+
+            mockMvc.perform(post("/product/edit")
+                            .param("productId", "1")
+                            .param("productName", "Updated Product")
+                            .param("productQuantity", "5"))
+                    .andExpect(status().is3xxRedirection())
+                    .andExpect(redirectedUrl("list"));
+
+            verify(productService, times(1)).edit(any(Product.class));
+        } catch (Exception e) {
+            fail("Exception thrown: " + e.getMessage());
+        }
+    }
+
+    @Test
+    void testDeleteProduct() {
+        try {
+            when(productService.delete("1")).thenReturn(product1);
+
+            mockMvc.perform(get("/product/delete/1"))
+                    .andExpect(status().is3xxRedirection())
+                    .andExpect(redirectedUrl("/product/list"));
+
+            verify(productService, times(1)).delete("1");
+        } catch (Exception e) {
+            fail("Exception thrown: " + e.getMessage());
+        }
+    }
 }
