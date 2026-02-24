@@ -56,9 +56,9 @@ menambahkan skenario tersebut ke `CreateProductFunctionalTest.java` saja supaya 
 <b>Reflection Modul 2</b>
 </summary>
 
-#Reflection 
+# Reflection 
 
-##You have implemented a CI/CD process that automatically runs the test suites, analyzes code quality, and deploys to a PaaS. Try to answer the following questions in order to reflect on your attempt completing the tutorial and exercise.
+## You have implemented a CI/CD process that automatically runs the test suites, analyzes code quality, and deploys to a PaaS. Try to answer the following questions in order to reflect on your attempt completing the tutorial and exercise.
 
 **1. List the code quality issue(s) that you fixed during the exercise and explain your strategy on fixing them.**
 Saya memperbaiki beberapa *code quality issues*. Beberapa diantaranya adalah:
