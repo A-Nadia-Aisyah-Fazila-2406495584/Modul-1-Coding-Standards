@@ -1,0 +1,39 @@
+name: Continuous Deployment (CD) to Koyeb
+
+on:
+  push:
+    branches:
+      - main
+      - module-2-exercise
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Koyeb login
+        run: |
+          echo "${{ secrets.KOYEB_API_TOKEN }}" | koyeb login --token
+
+      - name: Build Docker image
+        run: |
+          docker build -t advshop:latest .
+
+      - name: Deploy to Koyeb
+        run: |
+          koyeb service update \
+            --app advshop \
+            --service advshop \
+            --image advshop:latest \
+            --region "ams" \
+            --health-check-http "/"
+
+      - name: Wait for service to be healthy
+        run: |
+          echo "Waiting for Koyeb service to be healthy..."
+          sleep 15
