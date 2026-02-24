@@ -44,7 +44,7 @@ class ProductControllerTest {
     }
 
     @Test
-    void testShowCreateProductPage() throws Exception {
+    void testShowCreateProductPage() {
         mockMvc.perform(get("/product/create"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("CreateProduct"))
@@ -52,7 +52,7 @@ class ProductControllerTest {
     }
 
     @Test
-    void testCreateProductPost() throws Exception {
+    void testCreateProductPost() {
         when(productService.create(any(Product.class))).thenReturn(product1);
 
         mockMvc.perform(post("/product/create")
@@ -65,7 +65,7 @@ class ProductControllerTest {
     }
 
     @Test
-    void testProductListPage() throws Exception {
+    void testProductListPage() {
         when(productService.findAll()).thenReturn(Arrays.asList(product1, product2));
 
         mockMvc.perform(get("/product/list"))
