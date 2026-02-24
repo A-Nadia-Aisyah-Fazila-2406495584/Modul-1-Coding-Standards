@@ -23,4 +23,4 @@ jobs:
         env:
           KOYEB_TOKEN: ${{ secrets.KOYEB_API_TOKEN }}
         run: |
-          koyeb service update <app-name>/<service-name> --git-branch ${{ github.ref_name }}
+          koyeb service update permanent-thomasa-a-nadiaaisyahfazila-2406495584-f82740e8.koyeb.app/permanent-thomasa/modul-1-coding-standards --git-branch ${{ github.ref_name }}
