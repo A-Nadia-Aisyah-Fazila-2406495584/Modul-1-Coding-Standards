@@ -4,10 +4,13 @@
 
 **ADPRO-A**
 
+Deployment link -> [permanent-thomasa-a-nadiaaisyahfazila-2406495584-f82740e8.koyeb.app/]
+
 <details>
 <summary>
 <b>Reflection Modul 1</b>
 </summary>
+
 **Reflection 1**
     Pada modul ini, saya mempelajari tentang konsep clean code dan secure coding. Sebelumnya, saya 
 cenderung hanya fokus pada pembuatan program tanpa memperhatikan nama dari variabel maupun kerapihan pada kode
@@ -52,6 +55,7 @@ menambahkan skenario tersebut ke `CreateProductFunctionalTest.java` saja supaya 
 <summary>
 <b>Reflection Modul 2</b>
 </summary>
+
 #Reflection 
 ##You have implemented a CI/CD process that automatically runs the test suites, analyzes code quality, and deploys to a PaaS. Try to answer the following questions in order to reflect on your attempt completing the tutorial and exercise.
 **1. List the code quality issue(s) that you fixed during the exercise and explain your strategy on fixing them.**
