@@ -9,15 +9,20 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+      - name: Install Koyeb CLI
+        run: |
+          curl -sL https://cli.koyeb.com/install.sh | bash
+          export PATH=$HOME/.koyeb/bin:$PATH
+          koyeb version
 
       - name: Koyeb login
         run: |
+          export PATH=$HOME/.koyeb/bin:$PATH
           echo "${{ secrets.KOYEB_API_TOKEN }}" | koyeb login --token
 
       - name: Build Docker image
@@ -26,6 +31,7 @@ jobs:
 
       - name: Deploy to Koyeb
         run: |
+          export PATH=$HOME/.koyeb/bin:$PATH
           koyeb service update \
             --app advshop \
             --service advshop \
