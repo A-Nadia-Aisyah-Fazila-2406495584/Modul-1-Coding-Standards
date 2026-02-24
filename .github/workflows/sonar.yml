@@ -1,6 +1,5 @@
-name: Sonar
+name: SonarQube
 
-# Runs CI on all branches
 on:
   push:
   pull_request:
@@ -26,4 +25,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew build sonar
+        run:
+          chmod +x gradlew
+          ./gradlew build sonar
