@@ -23,8 +23,11 @@ class ProductControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @Mock
     private ProductService productService;
+
+    @InjectMocks
+    private ProductController productController;
 
     private Product product1;
     private Product product2;
