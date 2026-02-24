@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
-//import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.Iterator;
 
@@ -19,6 +18,7 @@ class ProductRepositoryTest {
 
     @BeforeEach
     void setUp() {
+        // empty set up
     }
 
     @Test
@@ -136,9 +136,9 @@ class ProductRepositoryTest {
 
         Product editedProduct = productRepository.findProductById("eb558e9f-1c39-460e-8860-71af6af63bd6");
 
-        assertEquals(editedProduct.getProductId(), "eb558e9f-1c39-460e-8860-71af6af63bd6");
-        assertEquals(editedProduct.getProductName(), "Sampo Cap Usep");
-        assertEquals(editedProduct.getProductQuantity(), 50);
+        assertEquals("eb558e9f-1c39-460e-8860-71af6af63bd6", editedProduct.getProductId());
+        assertEquals("Sampo Cap Usep", editedProduct.getProductName());
+        assertEquals(50, editedProduct.getProductQuantity());
     }
 
     @Test
