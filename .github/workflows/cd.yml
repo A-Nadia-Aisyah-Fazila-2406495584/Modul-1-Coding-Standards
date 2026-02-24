@@ -11,26 +11,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # 2. Install Koyeb CLI
       - name: Install Koyeb CLI
         run: |
           curl -fsSL https://raw.githubusercontent.com/koyeb/koyeb-cli/master/install.sh | sh
           echo "$HOME/.koyeb/bin" >> $GITHUB_PATH
 
+      # 3. Login ke Koyeb menggunakan token dari Secrets
       - name: Koyeb login
-        run: |
-          export PATH=$HOME/.koyeb/bin:$PATH
-          echo "${{ secrets.KOYEB_API_TOKEN }}" | koyeb login --token
+        run: echo "${{ secrets.KOYEB_API_TOKEN }}" | koyeb login --token
 
+      # 4. Build Docker image
       - name: Build Docker image
-        run: |
-          docker build -t advshop:latest .
+        run: docker build -t advshop:latest .
 
+      # 5. Deploy ke Koyeb
       - name: Deploy to Koyeb
         run: |
-          export PATH=$HOME/.koyeb/bin:$PATH
           koyeb service update \
             --app advshop \
             --service advshop \
@@ -38,6 +39,7 @@ jobs:
             --region "ams" \
             --health-check-http "/"
 
+      # 6. Tunggu hingga service sehat
       - name: Wait for service to be healthy
         run: |
           echo "Waiting for Koyeb service to be healthy..."
