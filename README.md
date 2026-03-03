@@ -11,13 +11,10 @@ Deployment link -> [https://permanent-thomasa-a-nadiaaisyahfazila-2406495584-f82
 <b>Reflection Modul 1</b>
 </summary>
 
-**Reflection 1**
-    Pada modul ini, saya mempelajari tentang konsep clean code dan secure coding. Sebelumnya, saya 
-cenderung hanya fokus pada pembuatan program tanpa memperhatikan nama dari variabel maupun kerapihan pada kode
-yang saya tulis, serta sering membuat satu function yang terlalu panjang.
-    Setelah saya mempelajari materi dari modul dan pembelajaran di kelas, saya jadi lebih memahami terkait
-dengan pentingnya menerapkan prinsip clean code. Contoh dari penulisan clean code yang saya terapkan
-adalah sebagai berikut:
+# Reflection 1
+
+Pada modul ini, saya mempelajari tentang konsep clean code dan secure coding. Sebelumnya, saya cenderung hanya fokus pada pembuatan program tanpa memperhatikan nama dari variabel maupun kerapihan pada kode yang saya tulis, serta sering membuat satu function yang terlalu panjang.
+Setelah saya mempelajari materi dari modul dan pembelajaran di kelas, saya jadi lebih memahami terkait dengan pentingnya menerapkan prinsip clean code. Contoh dari penulisan clean code yang saya terapkan adalah sebagai berikut:
 ```
 public Product findProductById(String id) {
     for (Product product : productData) {
@@ -28,16 +25,11 @@ public Product findProductById(String id) {
     return null;
 }
 ```
-Sebelum menerapkan prinsip clean code, saya akan menulis nama function tersebut hanya dengan 
-`findId` dan seringkali penulisan itu membuat saya bingung apakah *function* tersebut untuk mencari id atau untuk
-mencari product berdasarkan id. 
-    Dengan menerapkan prinsip clean code, kode yang saya tulis akan lebih mudah untuk dipahami baik 
+Sebelum menerapkan prinsip clean code, saya akan menulis nama function tersebut hanya dengan `findId` dan seringkali penulisan itu membuat saya bingung apakah *function* tersebut untuk mencari id atau untuk mencari product berdasarkan id. Dengan menerapkan prinsip clean code, kode yang saya tulis akan lebih mudah untuk dipahami baik 
 oleh saya ke depannya, maupun oleh orang lain.
-    Selain clean code, saya juga belajar mengenai secure coding yang dipraktikkan pada tutorial ini, yaitu dengan 
-menerapkan secure design yaitu dengan memisah `controller, service, dan repository`, sehingga akses data tidak langsung
-dilakukan dari controller supaya logic pada kode yang bersifat sensitif tidak tersebar.
+Selain clean code, saya juga belajar mengenai secure coding yang dipraktikkan pada tutorial ini, yaitu dengan menerapkan secure design yaitu dengan memisah `controller, service, dan repository`, sehingga akses data tidak langsung dilakukan dari controller supaya logic pada kode yang bersifat sensitif tidak tersebar.
 
-**Reflection 2**
+# Reflection 2
 1. Setelah menulis unit test, saya merasa lebih yakin dengan kode yang saya buat karena setiap *logic* pada kode
 diverifikasi. Unit test membantu saya dalam mendeteksi kesalahan *logic* pada kode yang saya buat. Jumlah unit test dalam 
 satu kelas tidak memiliki angka yang pasti, tetapi yang menurut saya harus diperhatikan adalah skenario yang akan di 
@@ -79,4 +71,53 @@ Menurut saya, implementasi saya sekarang sudah termasuk kategori CI/CD karena:
 - Setiap kali saya melakukan pull request ke GitHub, akan otomatis menjalankan workflows GitHub Actions yang menjalankan test, cek kualitas dari kode dengan SonarQube, serta melakukan analisis keamanan dengan OSSF Scorecard. Setiap kode yang di push dapat diverifikasi secara otomatis sehingga memenuhi prinsip Continuous Integration (CI)
 - Setelah pull request dimerge ke branch main, aplikasi secara otomatis diupdate di platform PaaS (Koyeb). Platform tersebut mendeteksi perubahan pada branch main, melakukan build menggunakan Dockerfile atau buildpack, dan memperbarui instance aplikasi hingga statusnya menjadi Healthy. Dengan begitu, setiap kode yang sudah lulus tahap pengujian dapat langsung tersedia sehingga memenuhi prinsip Continuous Deployment (CD)
   Intinya menurut saya, sudah memenuhi kategori CI/CD. CI dijalankan ketika melakukan pull request untuk melakukan verifikasi kode dan keamanannya, dan CD terjadi otomatis setelah merge ke main.
+</details>
+
+<details>
+<summary>
+<b>Reflection Modul 3</b>
+</summary>
+
+# Reflection
+
+## Apply the SOLID principles you have learned. You are allowed to modify the source code according to the principles you want to implement. Please answer the following questions:
+
+**1) Explain what principles you apply to your project!**
+- S (Single Responsibility Principle):
+    Dengan memisahkan `CarController` dari `ProductController`. 
+    - Sebelumnya, dengan menggabungkan keduanya dalam satu class dan `CarController extends ProductController` menjadikan seperti `CarController` adalah bagian dari `Product`. 
+    - Dengan memisahkannya, `CarController` hanya memiliki satu tanggung jawab yaitu mengelola request yang berhubungan dengan `Car` saja. Ketika ada perubahan logic pada `Product` tidak pengaruh ke `CarController` dan sebaliknya juga.
+- O (Open-Close Principle)
+    Dengan menggunakan interface yaitu `CarService` dan `CarRepository`.
+    - Open to extension = ketika butuh jenis car service yang berbeda, misal: punya discount logic khusus, maka jadi cukup untuk membuat class baru yang `implements CarService` dan tidak perlu untuk menghapus `CarServiceImpl` yang lama.
+    - Closed to modification = karena `CarController` bergantung dengan `CarService` maka tidak perlu untuk mengubah `CarController` ketika ingin menambah implementasi service yang baru.
+- L (Liskov Substitution Principle)
+    Dengan menghapus `extends ProductController`.
+    - Sebelumnya, `CarController` harus mengikuti `ProductController` seperti harus menerima `ProductService` sebagai constructornya.
+    - Setelah dihapus, `CarController` tidak lagi dipaksa untuk ikut dengan `ProductController` sehingga subclass bisa menggantikan superclass tanpa merusak logicnya.
+- I (Interface Segregation Principle
+    Dengan memisahkan interface dan implementasi pada `Car` dan `Product`
+    - Pemisahan tersebut memastikan bahwa tidak ada yang memaksa class `Car` untuk bergantung pada methods di `Product`yang tidak digunakannya, dan sebaliknya.
+- D (Dependency Inversion Principle)
+    Dengan membuat interface `CarRepository` yang di implemets oleh `CarRepositoryImpl`, serta menggunakan interface `CarService` pada `CarController`. 
+    - Perubahan ini memastikan bahwa modul tingkat tinggi (Controller) bergantung pada abstraksi dan bukan pada implementasi concrete. Hal ini membuat kode lebih fleksibel.
+
+**2) Explain the advantages of applying SOLID principles to your project with examples.**
+- Memudahkan dalam maintainability
+    - Karena setiap class memiliki single responsibilitu sehingga kita lebih mudah untuk tahu dimana harus mencari kode ketika terjadi masalah dan bugs.
+    - Contoh: ketika ada kesalahan pada logic penyimpanan mobil, cukup untuk periksa `CarRepositoryImpl` tanpa takut untuk merusak logic dari fitur lainnya misal `ProductRepositoryImpl`.
+- Lebih flexible
+    - Karena dengan dependency inversion principle, modul tingkat tinggi tidak lagi bergantung pada detail implementasi.
+    - Contoh: karena `CarController` memanggil interface `CarService` dan bukan implementasinya, bisa lebih mudah untuk mengganti logic pada `CarServiceImpl` tanpa harus mengubah code pada `CarController`.
+- Memudahkan ketika melakukan test 
+    - Karena dependensi bersifat abstract (interface) sehingga kita dapat melakukan unit test dengan mudah dengan mock.
+    - Contoh: ketika ingin test `CarController` cukup inject mock `CarService`.
+
+**3) Explain the disadvantages of not applying SOLID principles to your project with examples.**
+- Kode akan lebih kompleks sehingga susah untuk dipahami dan dikembangkan
+        - Tanpa interface segregation principle, sebuah kelas mungkin dapat dipaksa untuk mengimplementasikan method yang tidak diperlukannya.
+        - Contoh: misal hanya ada satu class `GeneralService` untuk semuanya, maka class `Car` mungkin harus untuk mengimplementasikan method yang tidak relevan untuk mobil misal method pada class `Product`.
+- Tight coupling atau ketergantungan pada implementasi concrete
+        - Tanpa dependency inversion principle, modul tingkat tinggi akan langsung bergantung dengan modul tingkat rendah.
+        - Contoh: Jika `CarController` langsung memanggil `CarServiceImpl` maka tiap ada perubahan di implementasinya (`CarServiceImpl`) harus mengubah kode di controllernya (`CarController`) juga.
 </details>
