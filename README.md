@@ -115,9 +115,9 @@ Menurut saya, implementasi saya sekarang sudah termasuk kategori CI/CD karena:
 
 **3) Explain the disadvantages of not applying SOLID principles to your project with examples.**
 - Kode akan lebih kompleks sehingga susah untuk dipahami dan dikembangkan
-        - Tanpa interface segregation principle, sebuah kelas mungkin dapat dipaksa untuk mengimplementasikan method yang tidak diperlukannya.
-        - Contoh: misal hanya ada satu class `GeneralService` untuk semuanya, maka class `Car` mungkin harus untuk mengimplementasikan method yang tidak relevan untuk mobil misal method pada class `Product`.
+    - Tanpa interface segregation principle, sebuah kelas mungkin dapat dipaksa untuk mengimplementasikan method yang tidak diperlukannya.
+    - Contoh: misal hanya ada satu class `GeneralService` untuk semuanya, maka class `Car` mungkin harus untuk mengimplementasikan method yang tidak relevan untuk mobil misal method pada class `Product`.
 - Tight coupling atau ketergantungan pada implementasi concrete
-        - Tanpa dependency inversion principle, modul tingkat tinggi akan langsung bergantung dengan modul tingkat rendah.
-        - Contoh: Jika `CarController` langsung memanggil `CarServiceImpl` maka tiap ada perubahan di implementasinya (`CarServiceImpl`) harus mengubah kode di controllernya (`CarController`) juga.
+    - Tanpa dependency inversion principle, modul tingkat tinggi akan langsung bergantung dengan modul tingkat rendah.
+    - Contoh: Jika `CarController` langsung memanggil `CarServiceImpl` maka tiap ada perubahan di implementasinya (`CarServiceImpl`) harus mengubah kode di controllernya (`CarController`) juga.
 </details>
