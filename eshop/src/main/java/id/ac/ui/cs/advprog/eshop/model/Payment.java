@@ -34,8 +34,12 @@ public class Payment {
     }
 
     private boolean validateVoucher(String code) {
-        if (code == null || code.length() != 16) return false;
-        if (!code.startsWith("ESHOP")) return false;
+        if (code == null || code.length() != 16) {
+            return false;
+        }
+        if (!code.startsWith("ESHOP")) {
+            return false;
+        }
         long digitCount = code.chars().filter(Character::isDigit).count();
         return digitCount == 8;
     }
