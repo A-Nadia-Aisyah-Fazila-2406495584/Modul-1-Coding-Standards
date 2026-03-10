@@ -51,4 +51,8 @@ public class Payment {
         return bankName != null && !bankName.isEmpty()
                 && referenceCode != null && !referenceCode.isEmpty();
     }
+
+    public String getOrderId() {
+        return "A";
+    }
 }
