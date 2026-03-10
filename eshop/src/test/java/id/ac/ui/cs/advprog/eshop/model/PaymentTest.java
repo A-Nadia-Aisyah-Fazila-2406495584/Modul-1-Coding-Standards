@@ -138,4 +138,13 @@ class PaymentTest {
         assertEquals("REJECTED", PaymentStatus.REJECTED.getValue());
         assertEquals("WAITING_PAYMENT", PaymentStatus.WAITING_PAYMENT.getValue());
     }
+
+    @Test
+    void testCreatePaymentWithOrderId() {
+        paymentData.put("bankName", "BCA");
+        paymentData.put("referenceCode", "REF123");
+        Payment payment = new Payment("p-001", "order-001", "BANK_TRANSFER", paymentData);
+        assertEquals("p-001", payment.getId());
+        assertEquals("order-001", payment.getOrderId());
+    }
 }

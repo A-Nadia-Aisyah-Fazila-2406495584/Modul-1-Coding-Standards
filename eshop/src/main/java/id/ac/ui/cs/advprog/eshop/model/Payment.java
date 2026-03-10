@@ -10,6 +10,7 @@ import java.util.Map;
 public class Payment {
     private String id;
     private String method;
+    private String orderId;
     @Setter
     private String status;
     private Map<String, String> paymentData;
@@ -19,6 +20,11 @@ public class Payment {
         this.method = method;
         this.paymentData = paymentData;
         this.status = determineStatus(method, paymentData);
+    }
+
+    public Payment(String id, String orderId, String method, Map<String, String> paymentData) {
+        this(id, method, paymentData);
+        this.orderId = orderId;
     }
 
     private String determineStatus(String method, Map<String, String> data) {
@@ -50,9 +56,5 @@ public class Payment {
         String referenceCode = data.get("referenceCode");
         return bankName != null && !bankName.isEmpty()
                 && referenceCode != null && !referenceCode.isEmpty();
-    }
-
-    public String getOrderId() {
-        return "A";
     }
 }

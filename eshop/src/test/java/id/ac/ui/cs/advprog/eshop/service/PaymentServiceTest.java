@@ -65,7 +65,7 @@ class PaymentServiceTest {
 
     @Test
     void testSetStatusSuccess() {
-        Payment payment = new Payment("p-001", "BANK_TRANSFER", paymentData);
+        Payment payment = new Payment("p-001", order.getId(), "BANK_TRANSFER", paymentData);
         doReturn(payment).when(paymentRepository).save(any(Payment.class));
         doReturn(order).when(orderService).findById(order.getId());
 
@@ -75,8 +75,30 @@ class PaymentServiceTest {
     }
 
     @Test
+    void testSetStatusOrderNotFound() {
+        Payment payment = new Payment("p-001", "not-exist-order", "BANK_TRANSFER", paymentData);
+        doReturn(payment).when(paymentRepository).save(any(Payment.class));
+        doReturn(null).when(orderService).findById("not-exist-order");
+
+        Payment result = paymentService.setStatus(payment, PaymentStatus.SUCCESS.getValue());
+        assertEquals(PaymentStatus.SUCCESS.getValue(), result.getStatus());
+        verify(orderService, times(0)).updateStatus(any(), any());
+    }
+
+    @Test
+    void testSetStatusWaitingPayment() {
+        Payment payment = new Payment("p-001", order.getId(), "BANK_TRANSFER", paymentData);
+        doReturn(payment).when(paymentRepository).save(any(Payment.class));
+        doReturn(order).when(orderService).findById(order.getId());
+
+        Payment result = paymentService.setStatus(payment, PaymentStatus.WAITING_PAYMENT.getValue());
+        assertEquals(PaymentStatus.WAITING_PAYMENT.getValue(), result.getStatus());
+        verify(orderService, times(0)).updateStatus(any(), any());
+    }
+
+    @Test
     void testSetStatusRejected() {
-        Payment payment = new Payment("p-001", "BANK_TRANSFER", paymentData);
+        Payment payment = new Payment("p-001", order.getId(), "BANK_TRANSFER", paymentData);
         doReturn(payment).when(paymentRepository).save(any(Payment.class));
         doReturn(order).when(orderService).findById(order.getId());
 
