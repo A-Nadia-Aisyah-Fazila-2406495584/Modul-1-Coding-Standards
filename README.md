@@ -121,3 +121,50 @@ Menurut saya, implementasi saya sekarang sudah termasuk kategori CI/CD karena:
     - Tanpa dependency inversion principle, modul tingkat tinggi akan langsung bergantung dengan modul tingkat rendah.
     - Contoh: Jika `CarController` langsung memanggil `CarServiceImpl` maka tiap ada perubahan di implementasinya (`CarServiceImpl`) harus mengubah kode di controllernya (`CarController`) juga.
 </details>
+
+
+<details>
+<summary>
+<b>Reflection Modul 4</b>
+</summary>
+
+# Reflection
+
+## You have followed the Test-Driven Development workflow in the Exercise. Now answer these questions:
+
+**1. Reflect based on Percival (2017) proposed self-reflective questions (in “Principles and Best Practice of Testing” submodule, chapter “Evaluating Your Testing Objectives”), whether this TDD flow is useful enough for you or not. If not, explain things that you need to do next time you make more tests.**
+- Menurut saya, TDD yang saya ikuti pada tutorial ini berguna. Dengan menulis test sebelum memulai coding, saya jadi lebih memahami requirement dan code yang saya buat. Proses coding yang saya lakukan juga jadi lebih terarah. 
+- RED-GREEN-REFACTOR membantu saya dalam memastikan fitur berjalan sebelum melanjutkan ke fitur yang selanjutnya.
+- Meskipun membantu, ada beberapa hal yang menurut saya perlu untuk saya perbaiki yaitu adalah membuat test case yang lebih beragam (tidak hanya happy dan unhappy tetapi edge case yang lebih specific juga) 
+
+**2. You have created unit tests in Tutorial. Now reflect whether your tests have successfully followed F.I.R.S.T. principle or not. If not, explain things that you need to do the next time you create more tests.**
+- Fast: test berjalan dengan cepat karena menggunakan `mock`.
+- Independent: setiap test independent karena menggunakan `setUp()` yang dijalankan ulang setiap test.
+- Repeatable: test bisa dijalankan berulang-ulang dengan hasil yang sama.
+- Self-validating: menggunakan `assertions` sehingga hasilnya jelas.
+- Timely: test ditulis sebelum implementasi sesuai dengan TDD.
+
+# Bonus 2
+https://github.com/A-Made-Shandy-Krisnanda-2406495615/Modul-2-CI-CD-DevOps/pull/10
+
+**1. Explain what you think about your partner’s code? Are there any aspects that are still lacking from your partner’s code?**
+Secara keseluruhan, kode partner sudah terstruktur dengan cukup baik. Pemisahan antara service dan repository juga sudah dilakukan dengan benar. Namun, ada beberapa aspek yang masih kurang. 
+- PaymentServiceImpl menggunakan konstanta string private (STATUS_SUCCESS, STATUS_REJECTED) dan tdk memanfaatkan enum yang lebih terstruktur, sehingga rentan terhadap typo dan tidak konsisten. 
+- PaymentService langsung memanipulasi status Order melalui payment.getOrder().setStatus(...), yang berarti service ini terlalu tahu tentang internal model lain dan melanggar prinsip encapsulation.
+
+**2. What did you do to contribute to your partner’s code?**
+- Mengidentifikasi code smells yang ada pada kode partner 
+- Melakukan refactoring untuk memperbaikinya. 
+  - Saya membuat enum PaymentStatus untuk menggantikan penggunaan konstanta string
+  - Menambahkan method contains() untuk validasi status
+  - Menambahkan OrderService ke dalam PaymentServiceImpl 
+  - Memindahkan logic update status Order ke method terpisah.
+
+**3. What code smells did you find on your partner’s code?**
+- Magic String: PaymentServiceImpl mendefinisikan STATUS_SUCCESS dan STATUS_REJECTED sebagai konstanta string private dan tdk menggunakan enum, sehingga tidak type-safe dan rentan typo.
+- Inappropriate Intimacy: PaymentService langsung memanggil payment.getOrder().setStatus(...) untuk mengubah status Order. Ini berarti PaymentService terlalu dalam masuk ke internal model Order, melanggar encapsulation dan prinsip Single Responsibility.
+
+**4. What refactoring steps did you suggest and execute to fix those smells?**
+- Magic String: Membuat enum PaymentStatus dengan method contains() untuk validasi, lalu mengganti semua penggunaan konstanta string dengan PaymentStatus.SUCCESS.getValue() dan PaymentStatus.REJECTED.getValue().
+- Inappropriate Intimacy: Menambahkan OrderService ke PaymentServiceImpl dan memisahkan logika update Order ke method updateRelatedOrderStatus() yang mendelegasikan ke orderService.updateStatus(), sehingga PaymentService tidak lagi langsung menyentuh internal Order.
+</details>
