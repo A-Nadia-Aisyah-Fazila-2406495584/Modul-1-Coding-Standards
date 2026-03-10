@@ -145,6 +145,8 @@ Menurut saya, implementasi saya sekarang sudah termasuk kategori CI/CD karena:
 - Timely: test ditulis sebelum implementasi sesuai dengan TDD.
 
 # Bonus 2
+https://github.com/A-Made-Shandy-Krisnanda-2406495615/Modul-2-CI-CD-DevOps/pull/10
+
 **1. Explain what you think about your partner’s code? Are there any aspects that are still lacking from your partner’s code?**
 Secara keseluruhan, kode partner sudah terstruktur dengan cukup baik. Pemisahan antara service dan repository juga sudah dilakukan dengan benar. Namun, ada beberapa aspek yang masih kurang. 
 - PaymentServiceImpl menggunakan konstanta string private (STATUS_SUCCESS, STATUS_REJECTED) dan tdk memanfaatkan enum yang lebih terstruktur, sehingga rentan terhadap typo dan tidak konsisten. 
