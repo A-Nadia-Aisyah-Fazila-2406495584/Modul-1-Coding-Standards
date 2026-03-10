@@ -146,7 +146,23 @@ Menurut saya, implementasi saya sekarang sudah termasuk kategori CI/CD karena:
 
 # Bonus 2
 **1. Explain what you think about your partner’s code? Are there any aspects that are still lacking from your partner’s code?**
+Secara keseluruhan, kode partner sudah terstruktur dengan cukup baik. Pemisahan antara service dan repository juga sudah dilakukan dengan benar. Namun, ada beberapa aspek yang masih kurang. 
+- PaymentServiceImpl menggunakan konstanta string private (STATUS_SUCCESS, STATUS_REJECTED) dan tdk memanfaatkan enum yang lebih terstruktur, sehingga rentan terhadap typo dan tidak konsisten. 
+- PaymentService langsung memanipulasi status Order melalui payment.getOrder().setStatus(...), yang berarti service ini terlalu tahu tentang internal model lain dan melanggar prinsip encapsulation.
+
 **2. What did you do to contribute to your partner’s code?**
+- Mengidentifikasi code smells yang ada pada kode partner 
+- Melakukan refactoring untuk memperbaikinya. 
+  - Saya membuat enum PaymentStatus untuk menggantikan penggunaan konstanta string
+  - Menambahkan method contains() untuk validasi status
+  - Menambahkan OrderService ke dalam PaymentServiceImpl 
+  - Memindahkan logic update status Order ke method terpisah.
+
 **3. What code smells did you find on your partner’s code?**
+- Magic String: PaymentServiceImpl mendefinisikan STATUS_SUCCESS dan STATUS_REJECTED sebagai konstanta string private dan tdk menggunakan enum, sehingga tidak type-safe dan rentan typo.
+- Inappropriate Intimacy: PaymentService langsung memanggil payment.getOrder().setStatus(...) untuk mengubah status Order. Ini berarti PaymentService terlalu dalam masuk ke internal model Order, melanggar encapsulation dan prinsip Single Responsibility.
+
 **4. What refactoring steps did you suggest and execute to fix those smells?**
+- Magic String: Membuat enum PaymentStatus dengan method contains() untuk validasi, lalu mengganti semua penggunaan konstanta string dengan PaymentStatus.SUCCESS.getValue() dan PaymentStatus.REJECTED.getValue().
+- Inappropriate Intimacy: Menambahkan OrderService ke PaymentServiceImpl dan memisahkan logika update Order ke method updateRelatedOrderStatus() yang mendelegasikan ke orderService.updateStatus(), sehingga PaymentService tidak lagi langsung menyentuh internal Order.
 </details>
