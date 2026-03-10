@@ -1,5 +1,6 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
+import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,14 +24,14 @@ public class Payment {
     private String determineStatus(String method, Map<String, String> data) {
         if ("VOUCHER_CODE".equals(method)) {
             return validateVoucher(data.get("voucherCode"))
-                    ? "SUCCESS"
-                    : "REJECTED";
+                    ? PaymentStatus.SUCCESS.getValue()
+                    : PaymentStatus.REJECTED.getValue();
         } else if ("BANK_TRANSFER".equals(method)) {
             return validateBankTransfer(data)
-                    ? "SUCCESS"
-                    : "REJECTED";
+                    ? PaymentStatus.SUCCESS.getValue()
+                    : PaymentStatus.REJECTED.getValue();
         }
-        return "REJECTED";
+        return PaymentStatus.REJECTED.getValue();
     }
 
     private boolean validateVoucher(String code) {
@@ -50,5 +51,4 @@ public class Payment {
         return bankName != null && !bankName.isEmpty()
                 && referenceCode != null && !referenceCode.isEmpty();
     }
-
 }
