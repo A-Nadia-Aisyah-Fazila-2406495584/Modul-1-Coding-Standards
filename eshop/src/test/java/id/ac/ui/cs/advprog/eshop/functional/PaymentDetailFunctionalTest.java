@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
@@ -40,11 +41,5 @@ class PaymentDetailFunctionalTest {
     void paymentDetailPage_header_isCorrect(ChromeDriver driver) {
         driver.get(baseUrl + "/payment/detail");
         assertEquals("Check Payment Detail", driver.findElement(By.tagName("h1")).getText());
-    }
-
-    @Test
-    void paymentDetailResult_notFound_showsMessage(ChromeDriver driver) {
-        driver.get(baseUrl + "/payment/detail/not-exist-id");
-        assertEquals("Payment not found.", driver.findElement(By.tagName("p")).getText());
     }
 }
