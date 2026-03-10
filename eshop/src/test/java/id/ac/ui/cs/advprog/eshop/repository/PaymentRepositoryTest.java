@@ -32,14 +32,17 @@ class PaymentRepositoryTest {
 
     @Test
     void testFindByIdFound() {
-        Payment payment = new Payment("p-001", "BANK_TRANSFER", paymentData);
+        Payment payment = new Payment("p-001", "o-001", "BANK_TRANSFER", paymentData);
         paymentRepository.save(payment);
         Payment result = paymentRepository.findById("p-001");
+        assertNotNull(result);
         assertEquals("p-001", result.getId());
     }
 
     @Test
     void testFindByIdNotFound() {
+        Payment payment = new Payment("p-001", "o-001", "BANK_TRANSFER", paymentData);
+        paymentRepository.save(payment);
         Payment result = paymentRepository.findById("not-exist");
         assertNull(result);
     }
