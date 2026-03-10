@@ -121,3 +121,27 @@ Menurut saya, implementasi saya sekarang sudah termasuk kategori CI/CD karena:
     - Tanpa dependency inversion principle, modul tingkat tinggi akan langsung bergantung dengan modul tingkat rendah.
     - Contoh: Jika `CarController` langsung memanggil `CarServiceImpl` maka tiap ada perubahan di implementasinya (`CarServiceImpl`) harus mengubah kode di controllernya (`CarController`) juga.
 </details>
+
+
+<details>
+<summary>
+<b>Reflection Modul 4</b>
+</summary>
+
+# Reflection
+
+## You have followed the Test-Driven Development workflow in the Exercise. Now answer these questions:
+
+**1. Reflect based on Percival (2017) proposed self-reflective questions (in “Principles and Best Practice of Testing” submodule, chapter “Evaluating Your Testing Objectives”), whether this TDD flow is useful enough for you or not. If not, explain things that you need to do next time you make more tests.**
+- Menurut saya, TDD yang saya ikuti pada tutorial ini berguna. Dengan menulis test sebelum memulai coding, saya jadi lebih memahami requirement dan code yang saya buat. Proses coding yang saya lakukan juga jadi lebih terarah. 
+- RED-GREEN-REFACTOR membantu saya dalam memastikan fitur berjalan sebelum melanjutkan ke fitur yang selanjutnya.
+- Meskipun membantu, ada beberapa hal yang menurut saya perlu untuk saya perbaiki yaitu adalah membuat test case yang lebih beragam (tidak hanya happy dan unhappy tetapi edge case yang lebih specific juga) 
+
+**2. You have created unit tests in Tutorial. Now reflect whether your tests have successfully followed F.I.R.S.T. principle or not. If not, explain things that you need to do the next time you create more tests.**
+- Fast: test berjalan dengan cepat karena menggunakan `mock`.
+- Independent: setiap test independent karena menggunakan `setUp()` yang dijalankan ulang setiap test.
+- Repeatable: test bisa dijalankan berulang-ulang dengan hasil yang sama.
+- Self-validating: menggunakan `assertions` sehingga hasilnya jelas.
+- Timely: test ditulis sebelum implementasi sesuai dengan TDD.
+
+</details>
