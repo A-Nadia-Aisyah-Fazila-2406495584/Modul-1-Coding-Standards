@@ -54,4 +54,17 @@ class PaymentRepositoryTest {
         List<Payment> all = paymentRepository.getAllPayments();
         assertEquals(2, all.size());
     }
+
+    @Test
+    void testSaveUpdateExistingPayment() {
+        Payment payment = new Payment("p-001", "BANK_TRANSFER",
+                new HashMap<>(Map.of("bankName", "Mandiri", "referenceCode", "REF123")));
+        paymentRepository.save(payment);
+
+        payment.setStatus("REJECTED");
+        Payment updated = paymentRepository.save(payment);
+
+        assertEquals("REJECTED", updated.getStatus());
+        assertEquals(1, paymentRepository.getAllPayments().size());
+    }
 }
