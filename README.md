@@ -144,4 +144,9 @@ Menurut saya, implementasi saya sekarang sudah termasuk kategori CI/CD karena:
 - Self-validating: menggunakan `assertions` sehingga hasilnya jelas.
 - Timely: test ditulis sebelum implementasi sesuai dengan TDD.
 
+# Bonus 2
+**1. Explain what you think about your partner’s code? Are there any aspects that are still lacking from your partner’s code?**
+**2. What did you do to contribute to your partner’s code?**
+**3. What code smells did you find on your partner’s code?**
+**4. What refactoring steps did you suggest and execute to fix those smells?**
 </details>
